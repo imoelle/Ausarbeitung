@@ -1,7 +1,9 @@
 package utilities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.awt.geom.Point2D;
-import java.util.Objects;
 
 /**************************************************************************************************
  * <h2>A class for vectors in 2D vector space.</h2>
@@ -31,24 +33,11 @@ import java.util.Objects;
  *     <li><i>Version: 01.01:&nbsp;</i>Create Vector2D as Point2D extension.</li>
  * </ul>
  *****/
+@Data
+@AllArgsConstructor
 public class Vector2D extends Point2D {
     private double x;
     private double y;
-
-    // ----- Vector2D constructors ------------------------------------------------------------- //
-    // Vector2D(double, double);
-    // Vector2D();
-    // ----------------------------------------------------------------------------------------- //
-
-    /**********************************************************************************************
-     * Create a Vector2D with given coordinates (x, y)
-     * @param x Vector2D x coordinate
-     * @param y Vector2D y coordinate
-     *****/
-    public Vector2D(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
 
     /**********************************************************************************************
      * Create a Vector2D with coordinates (0, 0)
@@ -144,7 +133,7 @@ public class Vector2D extends Point2D {
      * @since 01.00
      *****/
     public void divide(double scalar) {
-        if(checkForNotEqualZero(scalar)) {
+        if (checkForNotEqualZero(scalar)) {
             this.x /= scalar;
             this.y /= scalar;
         } else {
@@ -160,7 +149,7 @@ public class Vector2D extends Point2D {
      * @since 01.00
      *****/
     public Vector2D divideAndCreate(double scalar) {
-        if(checkForNotEqualZero(scalar)) {
+        if (checkForNotEqualZero(scalar)) {
             return new Vector2D(this.x / scalar,
                     this.y / scalar);
         } else {
@@ -420,28 +409,6 @@ public class Vector2D extends Point2D {
     }
 
     /**********************************************************************************************
-     * Returns the x value from Vector2D
-     * <p>Note: Abstract method derived from Point2D required to override</p>
-     * @return The x value from Vektor2D
-     * @since 01.01
-     *****/
-    @Override
-    public double getX() {
-        return this.x;
-    }
-
-    /**********************************************************************************************
-     * Returns the y value from Vector2D
-     * <p>Note: Abstract method derived from Point2D required to override</p>
-     * @return The y value from Vector2D
-     * @since 01.01
-     *****/
-    @Override
-    public double getY() {
-        return this.y;
-    }
-
-    /**********************************************************************************************
      * Set the location from Vector2D inside 2D space (window size).
      * <p>Note: Abstract method derived from Point2D required to override</p>
      * @param x the new X coordinate of this {@code Point2D}
@@ -461,54 +428,5 @@ public class Vector2D extends Point2D {
      *****/
     private boolean checkForNotEqualZero(double value) {
         return value != 0;
-    }
-
-    // ----- Overridden methods (global) ------------------------------------------------------- //
-    //    public boolean equals(Object)
-    //    public String toString();
-    //    public int hashCode();
-    // ----------------------------------------------------------------------------------------- //
-
-    /**********************************************************************************************
-     * Compares if the current Vector2D is equal to another Vector2D.
-     * <p>Note: Required global method to override</p>
-     * @param thatObject The Vector2D to be compared
-     * @return True if both Vector2D are the same, otherwise false
-     * @since 01.00
-     *****/
-    @Override
-    public boolean equals(Object thatObject) {
-        if(this == thatObject)
-            return true;
-        if(thatObject == null)
-            return false;
-        if (thatObject instanceof Vector2D) {
-            Vector2D that = (Vector2D) thatObject;
-            return (this.x == that.x) &&
-                    (this.y == that.y);
-        }
-        return false;
-    }
-
-    /**********************************************************************************************
-     * Returns a string as a representation of an object.
-     * <p>Note: Required global method to override</p>
-     * @return The representation of a Vector2D
-     * @since 01.00
-     */
-    @Override
-    public String toString() {
-        return "[" + this.x + ", " + this.y + "]";
-    }
-
-    /**********************************************************************************************
-     * Returns a numeric value that is a representation of an object.
-     * <p>Note: Required global method to override</p>
-     * @return A numeric value as representation of a Vector2D
-     * @since 01.00
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
     }
 }
