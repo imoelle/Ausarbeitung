@@ -24,7 +24,12 @@ import java.util.Objects;
  *      </ul></li>
  * </ul>
  * @author Ingo M&ouml;ller
- * @version 01.00
+ * @version 01.01 (current)
+ * <h3>Version history:</h3>
+ * <ul>
+ *     <li><i>Version: 01.00:&nbsp;</i>Create Vector2D class as standalone solution for 2D Java Swing graphics</li>
+ *     <li><i>Version: 01.01:&nbsp;</i>Create Vector2D as Point2D extension.</li>
+ * </ul>
  *****/
 public class Vector2D extends Point2D {
     private double x;
@@ -418,6 +423,7 @@ public class Vector2D extends Point2D {
      * Returns the x value from Vector2D
      * <p>Note: Abstract method derived from Point2D required to override</p>
      * @return The x value from Vektor2D
+     * @since 01.01
      *****/
     @Override
     public double getX() {
@@ -428,6 +434,7 @@ public class Vector2D extends Point2D {
      * Returns the y value from Vector2D
      * <p>Note: Abstract method derived from Point2D required to override</p>
      * @return The y value from Vector2D
+     * @since 01.01
      *****/
     @Override
     public double getY() {
@@ -439,9 +446,10 @@ public class Vector2D extends Point2D {
      * <p>Note: Abstract method derived from Point2D required to override</p>
      * @param x the new X coordinate of this {@code Point2D}
      * @param y the new Y coordinate of this {@code Point2D}
+     * @since 01.01
      *****/
     @Override
-    public void setLocation(double x, double y) {
+    public final void setLocation(double x, double y) {
         this.add(new Vector2D(x, y));
     }
 
