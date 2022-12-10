@@ -414,16 +414,32 @@ public class Vector2D extends Point2D {
         return this.magnitude() * vector.magnitude();
     }
 
+    /**********************************************************************************************
+     * Returns the x value from Vector2D
+     * <p>Note: Abstract method derived from Point2D required to override</p>
+     * @return The x value from Vektor2D
+     *****/
     @Override
     public double getX() {
         return this.x;
     }
 
+    /**********************************************************************************************
+     * Returns the y value from Vector2D
+     * <p>Note: Abstract method derived from Point2D required to override</p>
+     * @return The y value from Vector2D
+     *****/
     @Override
     public double getY() {
         return this.y;
     }
 
+    /**********************************************************************************************
+     * Set the location from Vector2D inside 2D space (window size).
+     * <p>Note: Abstract method derived from Point2D required to override</p>
+     * @param x the new X coordinate of this {@code Point2D}
+     * @param y the new Y coordinate of this {@code Point2D}
+     *****/
     @Override
     public void setLocation(double x, double y) {
         this.add(new Vector2D(x, y));
