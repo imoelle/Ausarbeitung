@@ -47,17 +47,10 @@ public class Rectangle {
 
     /**********************************************************************************************
      *
-<<<<<<< HEAD
      * @param sx Test 1
      * @param sy Test 2
      * @param ex Test 3
      * @param ey Test 4
-=======
-     * @param sx
-     * @param sy
-     * @param ex
-     * @param ey
->>>>>>> origin/develop_rectangle_class
      *****/
     public Rectangle(double sx, double sy, double ex, double ey) {
         this(new Vector2D(sx, sy), new Vector2D(ex, ey));
