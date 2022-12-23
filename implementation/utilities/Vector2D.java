@@ -31,9 +31,7 @@ import java.util.Objects;
  *     <li><i>Version: 01.01:&nbsp;</i>Create Vector2D as Point2D extension.</li>
  * </ul>
  *****/
-public class Vector2D extends Point2D {
-    private double x;
-    private double y;
+public class Vector2D extends Point2D.Double {
 
     // ----- Vector2D constructors ------------------------------------------------------------- //
     // Vector2D(double, double);
@@ -46,8 +44,7 @@ public class Vector2D extends Point2D {
      * @param y Vector2D y coordinate
      *****/
     public Vector2D(double x, double y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     /**********************************************************************************************
@@ -224,6 +221,18 @@ public class Vector2D extends Point2D {
     }
 
     /**********************************************************************************************
+     * Calculates the angle in radians between the current Vector2D and another Vector2D.
+     * @param theOther The corresponding Vector2D
+     * @return The angle in radians between both Vector2D
+     * @since 01.00
+     *****/
+    public double angleInRadiansTo(Vector2D theOther) {
+        checkForNotEqualZero(this.dotProductMagnitude(theOther));
+        return Math.acos(this.dotProduct(theOther) /
+                this.dotProductMagnitude(theOther));
+    }
+
+    /**********************************************************************************************
      * Calculates the unit vector from current Vector2D
      * <p>
      *     A given Vector2D can be normalized by dividing it by its magnitude (absolute value). The result is a Vector2D <br>
@@ -238,18 +247,6 @@ public class Vector2D extends Point2D {
         double magnitude = this.magnitude();
         return new Vector2D(this.x * (1 / magnitude),
                 this.y * (1 / magnitude));
-    }
-
-    /**********************************************************************************************
-     * Calculates the angle in radians between the current Vector2D and another Vector2D.
-     * @param theOther The corresponding Vector2D
-     * @return The angle in radians between both Vector2D
-     * @since 01.00
-     *****/
-    public double angleInRadiansTo(Vector2D theOther) {
-        checkForNotEqualZero(this.dotProductMagnitude(theOther));
-        return Math.acos(this.dotProduct(theOther) /
-                this.dotProductMagnitude(theOther));
     }
 
     /**********************************************************************************************
@@ -418,6 +415,26 @@ public class Vector2D extends Point2D {
     private double dotProductMagnitude(Vector2D vector) {
         return this.magnitude() * vector.magnitude();
     }
+    /**********************************************************************************************
+     * Checks that the given value is unequal zero.
+     * @param value Double value to check.
+     * @return True if value is not zero, otherwise false
+     * @since 01.00
+     *****/
+    private boolean checkForNotEqualZero(double value) {
+        return value != 0;
+    }
+
+
+
+    // ----- Overridden methods (global) ------------------------------------------------------- //
+    // public double getX()
+    // public double getY()
+    // public void setLocation(double, double)
+    // public boolean equals(Object)
+    // public String toString();
+    // public int hashCode();
+    // ----------------------------------------------------------------------------------------- //
 
     /**********************************************************************************************
      * Returns the x value from Vector2D
@@ -452,22 +469,6 @@ public class Vector2D extends Point2D {
     public final void setLocation(double x, double y) {
         this.add(new Vector2D(x, y));
     }
-
-    /**********************************************************************************************
-     * Checks that the given value is unequal zero.
-     * @param value Double value to check.
-     * @return True if value is not zero, otherwise false
-     * @since 01.00
-     *****/
-    private boolean checkForNotEqualZero(double value) {
-        return value != 0;
-    }
-
-    // ----- Overridden methods (global) ------------------------------------------------------- //
-    //    public boolean equals(Object)
-    //    public String toString();
-    //    public int hashCode();
-    // ----------------------------------------------------------------------------------------- //
 
     /**********************************************************************************************
      * Compares if the current Vector2D is equal to another Vector2D.
