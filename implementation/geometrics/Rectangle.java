@@ -103,29 +103,46 @@ public class Rectangle {
         return magnitude(area.x) * magnitude(area.y);
     }
 
+    /**********************************************************************************************
+     * Calculates the outline from Rectangle.
+     * <p>Note: Basic geometric operation on Rectangle.</p>
+     * @return The rectangle outline
+     */
+    public double outline() {
+        return (width + height) * 2;
+    }
+
+    /**********************************************************************************************
+     * Calculates the length from Rectangle diagonal.
+     * <p>Note: Basic geometric operation on Rectangle.</p>
+     * @return The Rectangle diagonal length
+     */
+    public double diagonal() {
+        return Math.sqrt(square(width) + square(height));
+    }
 
     // ----- Rectangle specific operations (public) -------------------------------------------- //
     //
     // ----------------------------------------------------------------------------------------- //
 
     public Vector2D middleAnchorPoint() {
-        return new Vector2D();
+        return location.addPartAndCreate(width / 2, height / 2);
     }
 
     public Vector2D topAnchorPoint() {
-        return new Vector2D();
+        return location.addPartAndCreate(width / 2, 0);
     }
 
     public Vector2D rightAnchorPoint() {
-        return new Vector2D();
+        return location.addPartAndCreate(width, height / 2);
     }
 
     public Vector2D bottomAnchorPoint() {
-        return new Vector2D();
+        return location.addPartAndCreate(width / 2, height);
     }
 
     public Vector2D leftAnchorPoint() {
-        return new Vector2D();
+        return location.addPartAndCreate(0, height / 2);
     }
 
     // ----- Rectangle specific operations (private) ------------------------------------------- //
@@ -139,6 +156,10 @@ public class Rectangle {
      */
     private double magnitude(double value) {
         return Math.sqrt(value * value);
+    }
+
+    private double square(double value) {
+        return value * value;
     }
 
 }

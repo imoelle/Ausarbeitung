@@ -24,11 +24,12 @@ import java.util.Objects;
  *      </ul></li>
  * </ul>
  * @author Ingo M&ouml;ller
- * @version 01.01 (current)
+ * @version 01.02 (current)
  * <h3>Version history:</h3>
  * <ul>
  *     <li><i>Version: 01.00:&nbsp;</i>Create Vector2D class as standalone solution for 2D Java Swing graphics</li>
  *     <li><i>Version: 01.01:&nbsp;</i>Create Vector2D as Point2D extension.</li>
+ *     <li><i>Version: 01.02:&nbsp;</i>Modify a given Vector2D with double values</li>
  * </ul>
  *****/
 public class Vector2D extends Point2D.Double {
@@ -57,6 +58,8 @@ public class Vector2D extends Point2D.Double {
     // ----- Vector2D basic arithmetic operations (public) ------------------------------------- //
     // void add(Vector2D);
     // Vector2D addAndCreate(Vector2D);
+    // void addPart(double, double);
+    // Vector2D addPartAndCreate(double, double);
     // void subtract(Vector2D);
     // Vector2D subtractAndCreate(Vector2D);
     // void multiply(double);
@@ -84,8 +87,29 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public Vector2D addAndCreate(Vector2D addend) {
-        return new Vector2D(this.x + addend.x,
-                this.y + addend.y);
+        return new Vector2D(this.x + addend.x, this.y + addend.y);
+    }
+
+    /**********************************************************************************************
+     * Adds specific values to the x and y coordinates.
+     * <p> Note: Basic arithmetic operation with single Vector2D.</p>
+     * @param partX Partial value x coordinate
+     * @param partY Partial value y coordinate
+     */
+    public void addPart(double partX, double partY) {
+        this.x += partX;
+        this.y += partY;
+    }
+
+    /**********************************************************************************************
+     * Creates a new Vector2D by adding partial values to the x and y coordinates
+     * <p> Note: Basic arithmetic operation with single Vector2D.</p>
+     * @param partX Partial value x coordinate
+     * @param partY Partial value y coordinate
+     * @return A new Vector2D with partial added component values
+     */
+    public Vector2D addPartAndCreate(double partX, double partY) {
+        return new Vector2D(this.x + partX, this.y + partY);
     }
 
     /**********************************************************************************************
@@ -107,8 +131,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public Vector2D subtractAndCreate(Vector2D subtrahend) {
-        return new Vector2D(this.x - subtrahend.x,
-                this.y - subtrahend.y);
+        return new Vector2D(this.x - subtrahend.x, this.y - subtrahend.y);
     }
 
     /**********************************************************************************************
@@ -130,8 +153,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      */
     public Vector2D multiplyAndCreate(double scalar) {
-        return new Vector2D(this.x * scalar,
-                this.y * scalar);
+        return new Vector2D(this.x * scalar, this.y * scalar);
     }
 
     /**********************************************************************************************
@@ -141,7 +163,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public void divide(double scalar) {
-        if(checkForNotEqualZero(scalar)) {
+        if (checkForNotEqualZero(scalar)) {
             this.x /= scalar;
             this.y /= scalar;
         } else {
@@ -157,9 +179,8 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public Vector2D divideAndCreate(double scalar) {
-        if(checkForNotEqualZero(scalar)) {
-            return new Vector2D(this.x / scalar,
-                    this.y / scalar);
+        if (checkForNotEqualZero(scalar)) {
+            return new Vector2D(this.x / scalar, this.y / scalar);
         } else {
             throw new ArithmeticException("Vector2D: Division by zero");
         }
@@ -191,8 +212,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public double dotProduct(Vector2D theOther) {
-        return this.x * theOther.x +
-                this.y * theOther.y;
+        return this.x * theOther.x + this.y * theOther.y;
     }
 
     /**********************************************************************************************
@@ -228,8 +248,7 @@ public class Vector2D extends Point2D.Double {
      *****/
     public double angleInRadiansTo(Vector2D theOther) {
         checkForNotEqualZero(this.dotProductMagnitude(theOther));
-        return Math.acos(this.dotProduct(theOther) /
-                this.dotProductMagnitude(theOther));
+        return Math.acos(this.dotProduct(theOther) / this.dotProductMagnitude(theOther));
     }
 
     /**********************************************************************************************
@@ -245,8 +264,7 @@ public class Vector2D extends Point2D.Double {
      *****/
     public Vector2D normalize() {
         double magnitude = this.magnitude();
-        return new Vector2D(this.x * (1 / magnitude),
-                this.y * (1 / magnitude));
+        return new Vector2D(this.x * (1 / magnitude), this.y * (1 / magnitude));
     }
 
     /**********************************************************************************************
@@ -273,8 +291,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public double hasHeadingAngle(Vector2D influence) {
-        return Math.toDegrees(influence.magnitude() /
-                this.magnitude());
+        return Math.toDegrees(influence.magnitude() / this.magnitude());
     }
 
     /**********************************************************************************************
@@ -286,8 +303,7 @@ public class Vector2D extends Point2D.Double {
      *****/
     public Vector2D rotateByAngle(double angleInDegrees) {
         double angle = Math.toRadians(angleInDegrees);
-        return new Vector2D(this.xTurnedBy(angle),
-                this.yTurnedBy(angle));
+        return new Vector2D(this.xTurnedBy(angle), this.yTurnedBy(angle));
     }
 
     /**********************************************************************************************
@@ -331,8 +347,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     public double euclideanDistanceTo(Vector2D theOther) {
-        return Math.sqrt(squareOf(theOther.x - this.x) +
-                squareOf(theOther.y - this.y));
+        return Math.sqrt(squareOf(theOther.x - this.x) + squareOf(theOther.y - this.y));
     }
 
     // ----- Vector2D specific operations internal (private) ----------------------------------- //
@@ -354,8 +369,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     private Vector2D createsNewVectorFrom(Vector2D source, double factor) {
-        return new Vector2D(source.x * factor,
-                source.y * factor);
+        return new Vector2D(source.x * factor, source.y * factor);
     }
 
     /**********************************************************************************************
@@ -366,8 +380,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     private double xTurnedBy(double angleInRadians) {
-        return this.x * Math.cos(angleInRadians) -
-                this.y * Math.sin(angleInRadians);
+        return this.x * Math.cos(angleInRadians) - this.y * Math.sin(angleInRadians);
     }
 
     /**********************************************************************************************
@@ -378,8 +391,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     private double yTurnedBy(double angleInRadians) {
-        return this.x * Math.sin(angleInRadians) +
-                this.y * Math.cos(angleInRadians);
+        return this.x * Math.sin(angleInRadians) + this.y * Math.cos(angleInRadians);
     }
 
     /**********************************************************************************************
@@ -390,8 +402,7 @@ public class Vector2D extends Point2D.Double {
      * @since 01.00
      *****/
     private double vectorSquareFrom(Vector2D vector) {
-        return vector.x * vector.x +
-                vector.y * vector.y;
+        return vector.x * vector.x + vector.y * vector.y;
     }
 
     /**********************************************************************************************
@@ -415,6 +426,7 @@ public class Vector2D extends Point2D.Double {
     private double dotProductMagnitude(Vector2D vector) {
         return this.magnitude() * vector.magnitude();
     }
+
     /**********************************************************************************************
      * Checks that the given value is unequal zero.
      * @param value Double value to check.
@@ -424,8 +436,6 @@ public class Vector2D extends Point2D.Double {
     private boolean checkForNotEqualZero(double value) {
         return value != 0;
     }
-
-
 
     // ----- Overridden methods (global) ------------------------------------------------------- //
     // public double getX()
@@ -479,9 +489,9 @@ public class Vector2D extends Point2D.Double {
      *****/
     @Override
     public boolean equals(Object thatObject) {
-        if(this == thatObject)
+        if (this == thatObject)
             return true;
-        if(thatObject == null)
+        if (thatObject == null)
             return false;
         if (thatObject instanceof Vector2D) {
             Vector2D that = (Vector2D) thatObject;
