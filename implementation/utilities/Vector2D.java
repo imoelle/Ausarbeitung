@@ -28,8 +28,8 @@ import java.util.Objects;
  * <h3>Version history:</h3>
  * <ul>
  *     <li><i>Version: 01.00:&nbsp;</i>Create Vector2D class as standalone solution for 2D Java Swing graphics</li>
- *     <li><i>Version: 01.01:&nbsp;</i>Create Vector2D as Point2D extension.</li>
- *     <li><i>Version: 01.02:&nbsp;</i>Modify a given Vector2D with double values</li>
+ *     <li><i>Version: 01.01:&nbsp;</i>Vector2D is a Point2D extension.</li>
+ *     <li><i>Version: 01.02:&nbsp;</i>Possibility to modify a Vector2D by partial double values for x, y coordinates</li>
  * </ul>
  *****/
 public class Vector2D extends Point2D.Double {
@@ -95,7 +95,8 @@ public class Vector2D extends Point2D.Double {
      * <p> Note: Basic arithmetic operation with single Vector2D.</p>
      * @param partX Partial value x coordinate
      * @param partY Partial value y coordinate
-     */
+     * @since 01.02
+     *****/
     public void addPart(double partX, double partY) {
         this.x += partX;
         this.y += partY;
@@ -107,7 +108,8 @@ public class Vector2D extends Point2D.Double {
      * @param partX Partial value x coordinate
      * @param partY Partial value y coordinate
      * @return A new Vector2D with partial added component values
-     */
+     * @since 01.02
+     *****/
     public Vector2D addPartAndCreate(double partX, double partY) {
         return new Vector2D(this.x + partX, this.y + partY);
     }
