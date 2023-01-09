@@ -28,6 +28,8 @@ public class Rectangle {
     // ----- Rectangle constructors ------------------------------------------------------------- //
     // Rectangle(Vector2D, double, double);
     // Rectangle(double, double);
+    // Rectangle(Vector2D, Vector2D);
+    // Rectangle(double, double, double, double);
     // ----------------------------------------------------------------------------------------- //
 
     /**********************************************************************************************
@@ -116,7 +118,7 @@ public class Rectangle {
      * Calculates the length from Rectangle diagonal.
      * <p>Note: Basic geometric operation on Rectangle.</p>
      * @return The Rectangle diagonal length
-     */
+     *****/
     public double diagonal() {
         return Math.sqrt(square(width) + square(height));
     }
