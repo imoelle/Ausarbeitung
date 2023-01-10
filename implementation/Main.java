@@ -1,3 +1,4 @@
+import geometrics.Rectangle;
 import utilities.Vector2D;
 
 import javax.swing.*;
@@ -37,6 +38,8 @@ class Content extends JPanel {
         top = top.addAndCreate(loc);
         leftBottom = leftBottom.addAndCreate(loc);
         rightBottom = rightBottom.addAndCreate(loc);
+        Rectangle r1 = new Rectangle(new Vector2D(0, 0), 200, 200);
+        System.out.println(r1.anchors);
     }
 
     @Override

@@ -2,6 +2,9 @@ package geometrics;
 
 import utilities.Vector2D;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**************************************************************************************************
  * <h2>A class for Rectangles in 2D vector space.</h2>
  * <p>
@@ -24,6 +27,7 @@ public class Rectangle {
     private final double width;
     private final double height;
     private Vector2D location;
+    public List<Vector2D> anchors = new ArrayList<>();
 
     // ----- Rectangle constructors ------------------------------------------------------------- //
     // Rectangle(Vector2D, double, double);
@@ -42,6 +46,7 @@ public class Rectangle {
         this.location = location;
         this.width = width;
         this.height = height;
+        calc();
     }
 
     /**********************************************************************************************
@@ -128,22 +133,27 @@ public class Rectangle {
     // ----------------------------------------------------------------------------------------- //
 
     public Vector2D middleAnchorPoint() {
+        anchors.add(location.addPartAndCreate(width / 2, height / 2));
         return location.addPartAndCreate(width / 2, height / 2);
     }
 
     public Vector2D topAnchorPoint() {
+        anchors.add(location.addPartAndCreate(width / 2, 0));
         return location.addPartAndCreate(width / 2, 0);
     }
 
     public Vector2D rightAnchorPoint() {
+        anchors.add(location.addPartAndCreate(width, height / 2));
         return location.addPartAndCreate(width, height / 2);
     }
 
     public Vector2D bottomAnchorPoint() {
+        anchors.add(location.addPartAndCreate(width / 2, height));
         return location.addPartAndCreate(width / 2, height);
     }
 
     public Vector2D leftAnchorPoint() {
+        anchors.add(location.addPartAndCreate(0, height / 2));
         return location.addPartAndCreate(0, height / 2);
     }
 
@@ -164,4 +174,11 @@ public class Rectangle {
         return value * value;
     }
 
+    private void calc() {
+        middleAnchorPoint();
+        topAnchorPoint();
+        rightAnchorPoint();
+        bottomAnchorPoint();
+        leftAnchorPoint();
+    }
 }
